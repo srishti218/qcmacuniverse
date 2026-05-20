@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuickReels - Fast Reel Video Editor</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial,sans-serif;
+    }
+
+    body{
+      background:#0b0f1a;
+      color:#fff;
+      line-height:1.6;
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 60px;
+      background:rgba(255,255,255,0.05);
+      backdrop-filter:blur(10px);
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+
+    .logo{
+      font-size:24px;
+      font-weight:bold;
+      color:#9b5cff;
+    }
+
+    nav a{
+      color:#fff;
+      text-decoration:none;
+      margin-left:20px;
+      opacity:0.8;
+      transition:0.3s;
+    }
+
+    nav a:hover{
+      opacity:1;
+      color:#9b5cff;
+    }
+
+    .hero{
+      text-align:center;
+      padding:120px 20px;
+      background:radial-gradient(circle at top,#1a1f3a,#0b0f1a);
+    }
+
+    .hero h1{
+      font-size:54px;
+      margin-bottom:20px;
+    }
+
+    .hero p{
+      max-width:700px;
+      margin:auto;
+      font-size:18px;
+      opacity:0.85;
+    }
+
+    .btn{
+      margin-top:30px;
+      padding:14px 28px;
+      border:none;
+      border-radius:10px;
+      background:linear-gradient(90deg,#7c5cff,#ff4fd8);
+      color:#fff;
+      font-size:16px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .btn:hover{
+      transform:scale(1.05);
+    }
+
+    .about{
+      padding:80px 20px;
+      text-align:center;
+      background:rgba(255,255,255,0.03);
+    }
+
+    .about h2{
+      margin-bottom:20px;
+      font-size:36px;
+    }
+
+    .about p{
+      max-width:850px;
+      margin:auto;
+      opacity:0.85;
+    }
+
+    .features{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+      padding:80px 60px;
+    }
+
+    .card{
+      background:rgba(255,255,255,0.05);
+      border-radius:16px;
+      padding:25px;
+      transition:0.3s;
+    }
+
+    .card:hover{
+      transform:translateY(-5px);
+      background:rgba(255,255,255,0.08);
+    }
+
+    .card h3{
+      color:#9b5cff;
+      margin-bottom:10px;
+    }
+
+    .cta{
+      text-align:center;
+      padding:80px 20px;
+    }
+
+    .cta h2{
+      font-size:40px;
+      margin-bottom:15px;
+    }
+
+    .privacy,
+    .support{
+      padding:60px 20px;
+      text-align:center;
+    }
+
+    .privacy{
+      background:rgba(255,255,255,0.03);
+    }
+
+    footer{
+      text-align:center;
+      padding:30px;
+      background:rgba(255,255,255,0.05);
+      opacity:0.7;
+      font-size:14px;
+    }
+
+    @media(max-width:768px){
+
+      header{
+        flex-direction:column;
+        padding:20px;
+      }
+
+      nav{
+        margin-top:15px;
+      }
+
+      .hero h1{
+        font-size:36px;
+      }
+
+      .features{
+        padding:40px 20px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">QuickReels</div>
+
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#about">About</a>
+    <a href="#privacy">Privacy</a>
+    <a href="#support">Support</a>
+  </nav>
+</header>
+
+<section class="hero">
+
+  <h1>Create Stunning Reels Instantly</h1>
+
+  <p>
+    QuickReels is a fast and powerful reel video editor for creators.
+    Trim clips, add music, apply effects, and export high-quality reels in seconds.
+  </p>
+
+  <button class="btn">Download Now</button>
+
+</section>
+
+<section id="about" class="about">
+
+  <h2>About QuickReels</h2>
+
+  <p>
+    QuickReels helps creators make professional-quality reels with simple editing tools, smooth transitions, text animations, and instant exports.
+    Designed for social creators who want fast editing without complexity.
+  </p>
+
+</section>
+
+<section id="features" class="features">
+
+  <div class="card">
+    <h3>Fast Reel Editing</h3>
+    <p>Edit videos quickly with smooth timeline controls and instant previews.</p>
+  </div>
+
+  <div class="card">
+    <h3>Music & Effects</h3>
+    <p>Add trending music</p>
+  </div>
+
+  <div class="card">
+    <h3>HD Export</h3>
+    <p>Export reels in high quality and share directly to social platforms.</p>
+  </div>
+
+</section>
+
+<section class="cta">
+
+  <h2>Ready to Go Viral?</h2>
+
+  <p>Create engaging reels and social videos with QuickReels.</p>
+
+  <button class="btn">Get Started</button>
+
+</section>
+
+<section id="privacy" class="privacy">
+
+  <h2>Privacy Policy</h2>
+
+  <p style="max-width:800px;margin:auto;opacity:0.85;">
+    QuickReels respects your privacy. Photos and videos are processed securely
+    and are never shared without your permission.
+  </p>
+
+</section>
+
+<section id="support" class="support">
+
+  <h2>Support</h2>
+
+  <p>
+    Need help? Contact us at
+    <b>srishti218@gmail.com</b>
+  </p>
+
+</section>
+
+<footer>
+  © 2026 QuickReels. All rights reserved.
+</footer>
+
+</body>
+</html>
