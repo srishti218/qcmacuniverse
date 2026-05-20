@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LumeoFilters - Smart Photo Filters</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #0b0f1a;
+      color: white;
+      line-height: 1.6;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #7c5cff;
+    }
+
+    nav a {
+      color: #fff;
+      margin-left: 20px;
+      text-decoration: none;
+      opacity: 0.8;
+    }
+
+    nav a:hover {
+      opacity: 1;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 120px 20px;
+      background: radial-gradient(circle at top, #1a1f3a, #0b0f1a);
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      opacity: 0.8;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .btn {
+      margin-top: 30px;
+      padding: 12px 24px;
+      background: #7c5cff;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 80px 60px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: #7c5cff;
+    }
+
+    .cta {
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: rgba(255,255,255,0.05);
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 20px;
+        flex-direction: column;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .features {
+        padding: 40px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">LumeoFilters</div>
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#about">About</a>
+    <a href="#privacy">Privacy Policy</a>
+    <a href="#support">Support</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Enhance Your Photos Instantly</h1>
+  <p>
+    LumeoFilters is a next-generation photo and video enhancement app that combines advanced enhancement with creative tools. Sync your content, apply advanced filters, and transform visuals into stunning, share-ready creations in seconds.
+  </p>
+  <button class="btn">Get Started</button>
+</section>
+
+<section class="about" style="padding:80px 20px; text-align:center; background: rgba(255,255,255,0.03);">
+  <h2>About LumeoFilters</h2>
+  <p style="max-width:800px;margin:auto;opacity:0.85;">
+    LumeoFilters is designed for creators, influencers, and everyday users who want effortless visual storytelling. With advanced enhancement, cinematic filters, and real-time previews, it turns ordinary photos and videos into professional-quality content instantly.
+  </p>
+</section>
+
+<section id="features" class="features">
+  <div class="card">
+    <h3>Advanced Filters</h3>
+    <p>Smart filters that adapt to your image style automatically.</p>
+  </div>
+
+  <div class="card">
+    <h3>One Click Enhance</h3>
+    <p>Improve brightness, contrast, and clarity instantly.</p>
+  </div>
+
+  <div class="card">
+    <h3>Pro Presets</h3>
+    <p>Access cinematic presets used by professionals.</p>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Ready to Transform Your Photos?</h2>
+  <p>Join thousands of creators using LumeoFilters.</p>
+  <button class="btn">Download Now</button>
+</section>
+
+<section id="privacy" style="padding:60px 20px; text-align:center; background: rgba(255,255,255,0.02);">
+  <h2>Privacy Policy</h2>
+  <p style="max-width:800px;margin:auto;opacity:0.85;">
+    We respect your privacy. LumeoFilters does not sell personal data. Your photos and videos are processed securely and are not shared without consent.
+  </p>
+</section>
+
+<section id="support" style="padding:60px 20px; text-align:center;">
+  <h2>Support</h2>
+  <p>Need help? Contact us at <b>srishti218@gmail.com</b></p>
+</section>
+
+<footer>
+  © 2026 LumeoFilters. All rights reserved .
+</footer>
+
+</body>
+</html>
