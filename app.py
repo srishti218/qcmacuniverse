@@ -11,7 +11,7 @@ def lumeofilters():
     return render_template("lumeofilters.html")
 
 @app.route("/quickreels.html")
-def lumeofilters():
+def quickreels():
     return render_template("quickreels.html")
 
 
