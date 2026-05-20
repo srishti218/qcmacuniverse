@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QcMacUniverse | Intelligent Systems</title>
+  <style>
+    :root {
+      --bg: #05070d;
+      --panel: rgba(12, 18, 31, 0.78);
+      --panel-strong: rgba(18, 27, 45, 0.92);
+      --text: #f4f8ff;
+      --muted: #a8b4c7;
+      --cyan: #36f1ff;
+      --green: #6affb8;
+      --amber: #ffcf6b;
+      --line: rgba(255, 255, 255, 0.12);
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 18%, rgba(54, 241, 255, 0.18), transparent 26rem),
+        radial-gradient(circle at 86% 8%, rgba(106, 255, 184, 0.13), transparent 24rem),
+        linear-gradient(135deg, #05070d 0%, #0b1020 48%, #07131b 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+      background-size: 54px 54px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.74), transparent 78%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(5, 7, 13, 0.72);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 78px;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(54, 241, 255, 0.32);
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 0 24px rgba(54, 241, 255, 0.22);
+    }
+
+    .brand span {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 1rem;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: #dce7f7;
+      font-size: 0.94rem;
+    }
+
+    nav a {
+      transition: color 180ms ease;
+    }
+
+    nav a:hover {
+      color: var(--cyan);
+    }
+
+    .nav-cta,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 18px;
+      border: 1px solid rgba(54, 241, 255, 0.45);
+      border-radius: 8px;
+      color: #031014;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--cyan), var(--green));
+      box-shadow: 0 14px 36px rgba(54, 241, 255, 0.2);
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.78fr);
+      gap: 48px;
+      align-items: center;
+      min-height: calc(100vh - 78px);
+      padding: 58px 0 72px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 34px;
+      padding: 0 12px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      color: #dbe8f9;
+      background: rgba(255, 255, 255, 0.06);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--green);
+      box-shadow: 0 0 16px var(--green);
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 24px 0 18px;
+      font-size: clamp(3rem, 7vw, 6.9rem);
+      line-height: 0.92;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(1.08rem, 1.8vw, 1.34rem);
+      line-height: 1.65;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .button.secondary {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.18);
+      box-shadow: none;
+    }
+
+    .signal-panel {
+      position: relative;
+      min-height: 520px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 34%),
+        var(--panel);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .signal-panel::before {
+      content: "";
+      position: absolute;
+      inset: 24px;
+      border: 1px solid rgba(54, 241, 255, 0.2);
+      border-radius: 8px;
+      background:
+        linear-gradient(90deg, rgba(54, 241, 255, 0.12) 1px, transparent 1px),
+        linear-gradient(rgba(54, 241, 255, 0.12) 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.7;
+    }
+
+    .core {
+      position: absolute;
+      inset: 50%;
+      width: 210px;
+      height: 210px;
+      translate: -50% -50%;
+      border: 1px solid rgba(54, 241, 255, 0.42);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(106, 255, 184, 0.86) 0 12%, rgba(54, 241, 255, 0.22) 13% 42%, transparent 43%),
+        conic-gradient(from 30deg, transparent, rgba(54, 241, 255, 0.9), transparent, rgba(255, 207, 107, 0.9), transparent);
+      filter: drop-shadow(0 0 38px rgba(54, 241, 255, 0.48));
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    .orbit {
+      position: absolute;
+      inset: 50%;
+      width: 330px;
+      height: 330px;
+      translate: -50% -50%;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 50%;
+      animation: rotate 18s linear infinite;
+    }
+
+    .orbit::after {
+      content: "";
+      position: absolute;
+      top: 36px;
+      right: 52px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--amber);
+      box-shadow: 0 0 22px var(--amber);
+    }
+
+    .metric {
+      position: absolute;
+      min-width: 148px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+      background: rgba(5, 7, 13, 0.72);
+      backdrop-filter: blur(14px);
+    }
+
+    .metric b {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1.35rem;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .metric.one {
+      top: 48px;
+      left: 32px;
+    }
+
+    .metric.two {
+      right: 28px;
+      bottom: 68px;
+    }
+
+    .metric.three {
+      left: 38px;
+      bottom: 46px;
+    }
+
+    section {
+      padding: 78px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 28px;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      margin: 0;
+      max-width: 720px;
+      font-size: clamp(2rem, 4vw, 3.7rem);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      max-width: 420px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .tile {
+      min-height: 260px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .tile .number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 46px;
+      border: 1px solid rgba(54, 241, 255, 0.28);
+      border-radius: 8px;
+      color: var(--cyan);
+      background: rgba(54, 241, 255, 0.08);
+      font-weight: 800;
+    }
+
+    .tile h3 {
+      margin: 0 0 12px;
+      font-size: 1.3rem;
+    }
+
+    .tile p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .mission-band {
+      border-block: 1px solid var(--line);
+      background:
+        linear-gradient(90deg, rgba(54, 241, 255, 0.1), transparent 36%, rgba(106, 255, 184, 0.09)),
+        rgba(255, 255, 255, 0.035);
+    }
+
+    .mission-card {
+      display: grid;
+      grid-template-columns: 0.7fr 1.3fr;
+      gap: 34px;
+      align-items: center;
+      padding: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+      background: var(--panel-strong);
+      box-shadow: var(--shadow);
+    }
+
+    .logo-mark {
+      width: min(100%, 260px);
+      aspect-ratio: 1;
+      margin: auto;
+      border: 1px solid rgba(54, 241, 255, 0.32);
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 0 64px rgba(54, 241, 255, 0.2);
+    }
+
+    .mission-card p {
+      margin: 0;
+      font-size: clamp(1.45rem, 3vw, 2.55rem);
+      line-height: 1.22;
+      color: #f7fbff;
+    }
+
+    .mission-card p span {
+      color: var(--green);
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(340px, 1fr);
+      gap: 28px;
+      align-items: start;
+      padding: 32px;
+      border: 1px solid rgba(54, 241, 255, 0.22);
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(54, 241, 255, 0.12), rgba(106, 255, 184, 0.08));
+    }
+
+    .contact h2 {
+      font-size: clamp(2rem, 3vw, 3rem);
+    }
+
+    .contact p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .project-form {
+      display: grid;
+      gap: 14px;
+      padding: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+      background: rgba(5, 7, 13, 0.62);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    label {
+      display: grid;
+      gap: 8px;
+      color: #dce7f7;
+      font-size: 0.86rem;
+      font-weight: 800;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-height: 46px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 8px;
+      padding: 12px 13px;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.07);
+      font: inherit;
+      outline: none;
+      transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    textarea {
+      min-height: 118px;
+      resize: vertical;
+    }
+
+    select {
+      appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--cyan) 50%),
+        linear-gradient(135deg, var(--cyan) 50%, transparent 50%);
+      background-position:
+        calc(100% - 18px) 19px,
+        calc(100% - 12px) 19px;
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: rgba(54, 241, 255, 0.72);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 0 4px rgba(54, 241, 255, 0.12);
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .form-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.5;
+    }
+
+    .project-form .button {
+      width: 100%;
+      border: 0;
+      cursor: pointer;
+      font-size: 0.98rem;
+    }
+
+    footer {
+      padding: 28px 0 34px;
+      color: #8190a6;
+      border-top: 1px solid var(--line);
+      font-size: 0.92rem;
+    }
+
+    @keyframes rotate {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.9;
+      }
+      50% {
+        transform: scale(1.06);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .shell {
+        width: min(100% - 28px, 680px);
+      }
+
+      .nav {
+        min-height: auto;
+        padding: 14px 0;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding-top: 48px;
+      }
+
+      .signal-panel {
+        min-height: 420px;
+      }
+
+      .section-head,
+      .mission-card,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        align-items: start;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      h1 {
+        font-size: clamp(2.55rem, 15vw, 3.45rem);
+      }
+
+      .actions,
+      .button,
+      .nav-cta {
+        width: 100%;
+      }
+
+      .signal-panel {
+        min-height: 360px;
+      }
+
+      .core {
+        width: 150px;
+        height: 150px;
+      }
+
+      .orbit {
+        width: 238px;
+        height: 238px;
+      }
+
+      .metric {
+        min-width: 124px;
+        padding: 12px;
+      }
+
+      .metric.one {
+        top: 28px;
+        left: 18px;
+      }
+
+      .metric.two {
+        right: 16px;
+        bottom: 50px;
+      }
+
+      .metric.three {
+        left: 18px;
+        bottom: 22px;
+      }
+
+      .mission-card,
+      .contact {
+        padding: 24px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell nav">
+      <a class="brand" href="#top" aria-label="QcMacUniverse home">
+        <img src="qcmacuniverse.webp" alt="QcMacUniverse logo" />
+        <span>
+          QcMacUniverse
+          <strong>Intelligence for scale</strong>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#systems">Systems</a>
+        <a href="#mission">Mission</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-cta" href="#project-form">Start a Project</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="shell hero">
+      <div>
+        <span class="eyebrow">AI automation studio</span>
+        <h1>Building intelligent digital futures.</h1>
+        <p>
+          QcMacUniverse creates intelligent systems and scalable digital products that help businesses and individuals move faster, automate smarter, and grow globally.
+        </p>
+        <div class="actions">
+          <a class="button" href="#project-form">Build With Us</a>
+          <a class="button secondary" href="#mission">Explore Mission</a>
+        </div>
+      </div>
+
+      <div class="signal-panel" aria-label="Futuristic intelligence interface">
+        <div class="orbit"></div>
+        <div class="core"></div>
+        <div class="metric one">
+          <b>AI</b>
+          <span>Decision systems</span>
+        </div>
+        <div class="metric two">
+          <b>24/7</b>
+          <span>Automated workflows</span>
+        </div>
+        <div class="metric three">
+          <b>Global</b>
+          <span>Digital scale</span>
+        </div>
+      </div>
+    </div>
+
+    <section id="systems">
+      <div class="shell">
+        <div class="section-head">
+          <h2>Systems designed for the next operating layer.</h2>
+          <p>From AI-powered software to automation pipelines, every product is built to be useful, resilient, and ready to grow.</p>
+        </div>
+        <div class="grid">
+          <article class="tile">
+            <div class="number">01</div>
+            <h3>Intelligent Systems</h3>
+            <p>AI-assisted tools that transform data, decisions, and repetitive processes into reliable digital capability.</p>
+          </article>
+          <article class="tile">
+            <div class="number">02</div>
+            <h3>Scalable Products</h3>
+            <p>Modern web and software products shaped for performance, clean user journeys, and long-term growth.</p>
+          </article>
+          <article class="tile">
+            <div class="number">03</div>
+            <h3>Automation Engines</h3>
+            <p>Workflow automation that reduces manual effort and gives teams more time for high-value work.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mission-band" id="mission">
+      <div class="shell mission-card">
+        <img class="logo-mark" src="qcmacuniverse.webp" alt="QcMacUniverse brand mark" />
+        <p>
+          Our mission is to create <span>intelligent systems</span> and scalable digital products that empower businesses and individuals globally through innovation and automation.
+        </p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="shell contact">
+        <div>
+          <h2>Launch the next system.</h2>
+          <p>Share the essentials and the inquiry will open as an email to qcmacuniverse@gmail.com.</p>
+        </div>
+        <form
+          class="project-form"
+          id="project-form"
+          action="mailto:qcmacuniverse@gmail.com"
+          method="post"
+          enctype="text/plain"
+        >
+          <div class="form-grid">
+            <label>
+              Name
+              <input name="name" type="text" autocomplete="name" placeholder="Your name" required />
+            </label>
+            <label>
+              Email
+              <input name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+            </label>
+            <label>
+              Company
+              <input name="company" type="text" autocomplete="organization" placeholder="Business or individual" />
+            </label>
+            <label>
+              Project Type
+              <select name="projectType" required>
+                <option value="" disabled selected>Select one</option>
+                <option>AI system</option>
+                <option>Automation workflow</option>
+                <option>Web or app product</option>
+                <option>Consulting</option>
+              </select>
+            </label>
+            <label>
+              Timeline
+              <select name="timeline" required>
+                <option value="" disabled selected>Select one</option>
+                <option>Immediately</option>
+                <option>2-4 weeks</option>
+                <option>1-3 months</option>
+                <option>Exploring options</option>
+              </select>
+            </label>
+            <label>
+              Budget
+              <select name="budget">
+                <option value="" selected>Not decided</option>
+                <option>Under $1,000</option>
+                <option>$1,000-$5,000</option>
+                <option>$5,000-$15,000</option>
+                <option>$15,000+</option>
+              </select>
+            </label>
+            <label class="full">
+              Project Details
+              <textarea name="details" placeholder="What do you want to build or automate?" required></textarea>
+            </label>
+          </div>
+          <p class="form-note">Your email app will open with the message prepared for QcMacUniverse.</p>
+          <button class="button" type="submit">Send Project Inquiry</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">© 2026 QcMacUniverse. Intelligent systems, scalable products, global automation.</div>
+  </footer>
+  <script>
+    const projectForm = document.querySelector("#project-form");
+
+    if (projectForm) {
+      projectForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        if (!projectForm.reportValidity()) {
+          return;
+        }
+
+        const data = new FormData(projectForm);
+        const name = String(data.get("name") || "").trim();
+        const email = String(data.get("email") || "").trim();
+        const company = String(data.get("company") || "").trim() || "Not provided";
+        const projectType = String(data.get("projectType") || "").trim();
+        const timeline = String(data.get("timeline") || "").trim();
+        const budget = String(data.get("budget") || "").trim() || "Not decided";
+        const details = String(data.get("details") || "").trim();
+        const subject = `Project inquiry from ${name}`;
+        const body = [
+          "Hello QcMacUniverse,",
+          "",
+          "I would like to start a project.",
+          "",
+          `Name: ${name}`,
+          `Email: ${email}`,
+          `Company: ${company}`,
+          `Project type: ${projectType}`,
+          `Timeline: ${timeline}`,
+          `Budget: ${budget}`,
+          "",
+          "Project details:",
+          details
+        ].join("\n");
+        const mailtoLink = `mailto:qcmacuniverse@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const emailLink = document.createElement("a");
+
+        emailLink.href = mailtoLink;
+        emailLink.style.display = "none";
+        document.body.appendChild(emailLink);
+        alert("Thank you. Your project inquiry is ready to send to qcmacuniverse@gmail.com.");
+        emailLink.click();
+        emailLink.remove();
+      });
+    }
+  </script>
+</body>
+</html>
