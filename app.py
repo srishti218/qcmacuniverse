@@ -14,6 +14,11 @@ def lumeofilters():
 def quickreels():
     return render_template("quickreels.html")
 
+@app.route("/scantextpdf.html")
+def quickreels():
+    return render_template("scantextpdf.html")
+
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
