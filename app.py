@@ -15,7 +15,7 @@ def quickreels():
     return render_template("quickreels.html")
 
 @app.route("/scantextpdf.html")
-def quickreels():
+def scantextpdf():
     return render_template("scantextpdf.html")
 
 
