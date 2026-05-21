@@ -18,6 +18,9 @@ def quickreels():
 def scantextpdf():
     return render_template("scantextpdf.html")
 
+@app.route("/voicent.html")
+def voicent():
+    return render_template("voicent.html")
 
 
 if __name__ == "__main__":

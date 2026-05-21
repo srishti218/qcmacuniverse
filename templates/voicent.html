@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VoiceNT - Smart Voice Notes</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter, sans-serif;
+}
+
+body{
+  background:#f5f1ea;
+  color:#111827;
+  overflow-x:hidden;
+}
+
+/* NAVBAR */
+
+header{
+  width:100%;
+  padding:24px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#f5f1ea;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.logo{
+  font-size:34px;
+  font-weight:800;
+  color:#0f172a;
+}
+
+nav a{
+  text-decoration:none;
+  color:#374151;
+  margin-left:24px;
+  font-weight:500;
+  transition:0.3s;
+}
+
+nav a:hover{
+  color:#0f766e;
+}
+
+/* HERO */
+
+.hero{
+  padding:90px 7% 70px;
+}
+
+.hero-box{
+  background:white;
+  border-radius:32px;
+  padding:70px;
+  display:grid;
+  grid-template-columns:1fr 420px;
+  align-items:center;
+  gap:50px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
+
+.hero h1{
+  font-size:68px;
+  line-height:1.05;
+  margin-bottom:22px;
+  color:#0f172a;
+}
+
+.hero p{
+  font-size:19px;
+  line-height:1.8;
+  color:#4b5563;
+  max-width:620px;
+}
+
+.hero-buttons{
+  margin-top:35px;
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:16px 28px;
+  border-radius:16px;
+  text-decoration:none;
+  font-weight:700;
+  transition:0.3s;
+}
+
+.primary{
+  background:#0f766e;
+  color:white;
+}
+
+.primary:hover{
+  transform:translateY(-3px);
+}
+
+.secondary{
+  border:1px solid #d1d5db;
+  color:#111827;
+  background:white;
+}
+
+/* PHONE UI */
+
+.phone{
+  background:#f8fafc;
+  border-radius:36px;
+  padding:20px;
+  border:1px solid #dbe4ea;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+
+.screen{
+  background:white;
+  border-radius:28px;
+  padding:22px;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:26px;
+}
+
+.top h2{
+  font-size:28px;
+  color:#0f172a;
+}
+
+.note-count{
+  background:#0f172a;
+  color:white;
+  padding:14px;
+  border-radius:18px;
+  text-align:center;
+  width:90px;
+}
+
+.record-box{
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+  padding:22px;
+  border-radius:22px;
+  margin-bottom:20px;
+}
+
+.record-btn{
+  margin-top:18px;
+  background:#0f766e;
+  color:white;
+  text-align:center;
+  padding:18px;
+  border-radius:16px;
+  font-weight:700;
+}
+
+.voice-note{
+  background:#ffffff;
+  border:1px solid #e5e7eb;
+  border-radius:22px;
+  padding:20px;
+  margin-top:18px;
+}
+
+.voice-note h3{
+  margin-bottom:10px;
+  color:#111827;
+}
+
+.voice-note p{
+  color:#6b7280;
+  font-size:15px;
+  line-height:1.7;
+}
+
+/* FEATURES */
+
+.features{
+  padding:100px 7%;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:60px;
+}
+
+.section-title h2{
+  font-size:48px;
+  margin-bottom:14px;
+}
+
+.section-title p{
+  color:#6b7280;
+}
+
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px;
+}
+
+.card{
+  background:white;
+  padding:36px;
+  border-radius:26px;
+  border:1px solid #e5e7eb;
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+}
+
+.icon{
+  width:64px;
+  height:64px;
+  border-radius:18px;
+  background:#ecfeff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  margin-bottom:22px;
+}
+
+.card h3{
+  font-size:24px;
+  margin-bottom:12px;
+}
+
+.card p{
+  color:#6b7280;
+  line-height:1.7;
+}
+
+/* CTA */
+
+.cta{
+  padding:40px 7% 100px;
+}
+
+.cta-box{
+  background:#0f172a;
+  color:white;
+  border-radius:36px;
+  padding:80px 50px;
+  text-align:center;
+}
+
+.cta-box h2{
+  font-size:54px;
+  margin-bottom:20px;
+}
+
+.cta-box p{
+  max-width:700px;
+  margin:auto;
+  opacity:0.8;
+  font-size:18px;
+  line-height:1.8;
+}
+
+.cta-box .btn{
+  margin-top:35px;
+  display:inline-block;
+}
+
+/* FOOTER */
+
+footer{
+  padding:40px;
+  text-align:center;
+  color:#6b7280;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+  .hero-box{
+    grid-template-columns:1fr;
+    padding:40px;
+  }
+
+  .hero h1{
+    font-size:46px;
+  }
+
+}
+
+@media(max-width:768px){
+
+  header{
+    flex-direction:column;
+    gap:16px;
+  }
+
+  nav{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  nav a{
+    margin:8px 12px;
+  }
+
+  .hero{
+    padding-top:40px;
+  }
+
+  .hero-box{
+    padding:28px;
+  }
+
+  .hero h1{
+    font-size:38px;
+  }
+
+  .section-title h2{
+    font-size:36px;
+  }
+
+  .cta-box h2{
+    font-size:38px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">VoiceNT</div>
+
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#download">Download</a>
+    <a href="#support">Support</a>
+  </nav>
+
+</header>
+
+<section class="hero">
+
+  <div class="hero-box">
+
+    <div>
+
+      <h1>
+        Capture Thoughts Before They Cool Off
+      </h1>
+
+      <p>
+        Record meetings, lectures, and quick ideas instantly with VoiceNT.
+        Convert speech into organized notes with fast AI transcription
+        and a clean distraction-free experience.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#" class="btn primary">
+          Download Now
+        </a>
+
+        <a href="#features" class="btn secondary">
+          Explore Features
+        </a>
+      </div>
+
+    </div>
+
+    <div class="phone">
+
+      <div class="screen">
+
+        <div class="top">
+
+          <h2>VoiceNT</h2>
+
+          <div class="note-count">
+            <div style="font-size:28px;font-weight:800;">6</div>
+            <div style="font-size:13px;">NOTES</div>
+          </div>
+
+        </div>
+
+        <div class="record-box">
+
+          <h3 style="margin-bottom:10px;">New Voice Note</h3>
+
+          <p style="color:#6b7280;">
+            Tap below to start recording instantly.
+          </p>
+
+          <div class="record-btn">
+            ● Record
+          </div>
+
+        </div>
+
+        <div class="voice-note">
+
+          <h3>Project Standup</h3>
+
+          <p>
+            Finalize onboarding flow and review voice recording permissions.
+          </p>
+
+        </div>
+
+        <div class="voice-note">
+
+          <h3>Lecture Summary</h3>
+
+          <p>
+            AI transcription completed successfully for today's session.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="features" class="features">
+
+  <div class="section-title">
+
+    <h2>Simple & Powerful Features</h2>
+
+    <p>
+      Designed for fast voice note taking and productivity.
+    </p>
+
+  </div>
+
+  <div class="feature-grid">
+
+    <div class="card">
+
+      <div class="icon">🎙️</div>
+
+      <h3>Crystal Recording</h3>
+
+      <p>
+        Record clear and high-quality voice notes instantly.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <div class="icon">📝</div>
+
+      <h3>Speech To Text</h3>
+
+      <p>
+        Convert recordings into accurate and readable text notes.
+      </p>
+
+    </div>
+
+    <div class="card">
+
+      <div class="icon">🔍</div>
+
+      <h3>Smart Search</h3>
+
+      <p>
+        Quickly find notes using keywords and voice recognition.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="download" class="cta">
+
+  <div class="cta-box">
+
+    <h2>
+      Download VoiceNT Today
+    </h2>
+
+    <p>
+      Start recording ideas, meetings, and lectures with a clean
+      modern voice note experience.
+    </p>
+
+    <a href="#" class="btn primary">
+      Download Now
+    </a>
+
+  </div>
+
+</section>
+
+<footer id="support">
+
+  <p>
+    Contact: support@voicentapp.com
+  </p>
+
+  <br>
+
+  <p>
+    © 2026 VoiceNT. All rights reserved.
+  </p>
+
+</footer>
+
+</body>
+</html>
