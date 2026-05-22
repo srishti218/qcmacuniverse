@@ -22,6 +22,11 @@ def scantextpdf():
 def voicent():
     return render_template("voicent.html")
 
+@app.route("/docsnap.html")
+def voicent():
+    return render_template("docsnap.html")
+
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
