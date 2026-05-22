@@ -23,7 +23,7 @@ def voicent():
     return render_template("voicent.html")
 
 @app.route("/docsnap.html")
-def voicent():
+def docsnap():
     return render_template("docsnap.html")
 
 
