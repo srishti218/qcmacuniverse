@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docstudy - PDF Study App</title>
+  <meta name="description" content="Docstudy is a React Native Expo app that turns PDFs into quizzes, flashcards, questions and answers, and short-answer practice using your own OpenAI API key. No backend required." />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #F5F1EA;
+      color: #111827;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      width: 100%;
+      padding: 22px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(245, 241, 234, 0.94);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #E5E7EB;
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: 900;
+      color: #0F172A;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: #0F766E;
+    }
+
+    nav a {
+      color: #374151;
+      text-decoration: none;
+      margin-left: 24px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #0F766E;
+    }
+
+    .hero {
+      padding: 90px 7% 70px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #ECFEFF;
+      color: #0F766E;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-weight: 800;
+      margin-bottom: 22px;
+      border: 1px solid #A5F3FC;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 6vw, 72px);
+      line-height: 1.05;
+      color: #0F172A;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span {
+      color: #0F766E;
+    }
+
+    .hero p {
+      font-size: 19px;
+      color: #6B7280;
+      max-width: 620px;
+      margin-bottom: 34px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 26px;
+      border-radius: 14px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: #0F766E;
+      color: #FFFFFF;
+      box-shadow: 0 14px 30px rgba(15, 118, 110, 0.22);
+    }
+
+    .btn-primary:hover {
+      background: #115E59;
+      transform: translateY(-3px);
+    }
+
+    .btn-secondary {
+      background: #FFFFFF;
+      color: #0F172A;
+      border: 1px solid #E5E7EB;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      border-color: #22D3EE;
+    }
+
+    .phone-card {
+      background: #FFFFFF;
+      border-radius: 36px;
+      padding: 28px;
+      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.14);
+      border: 1px solid #E5E7EB;
+    }
+
+    .screen {
+      background: linear-gradient(160deg, #0F172A, #0F766E);
+      min-height: 520px;
+      border-radius: 28px;
+      padding: 26px;
+      color: white;
+      overflow: hidden;
+    }
+
+    .screen h3 {
+      font-size: 26px;
+      margin-bottom: 18px;
+    }
+
+    .upload-box {
+      background: rgba(255,255,255,0.12);
+      border: 1px dashed rgba(255,255,255,0.45);
+      border-radius: 22px;
+      padding: 30px;
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .mini-card {
+      background: rgba(255,255,255,0.14);
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    .mini-card strong {
+      display: block;
+      color: #A5F3FC;
+      margin-bottom: 4px;
+    }
+
+    section {
+      padding: 80px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 50px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(34px, 4vw, 48px);
+      color: #0F172A;
+      margin-bottom: 14px;
+      letter-spacing: -1px;
+    }
+
+    .section-title p {
+      color: #6B7280;
+      font-size: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: #FFFFFF;
+      padding: 28px;
+      border-radius: 24px;
+      border: 1px solid #E5E7EB;
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.06);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 50px rgba(15, 23, 42, 0.10);
+    }
+
+    .icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      background: #ECFEFF;
+      color: #0F766E;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      color: #0F172A;
+      font-size: 21px;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #6B7280;
+      font-size: 15.5px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .step {
+      background: #F8FAFC;
+      border: 1px solid #E5E7EB;
+      border-radius: 24px;
+      padding: 30px;
+    }
+
+    .step-number {
+      background: #0F766E;
+      color: #FFFFFF;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .privacy {
+      background: #0F172A;
+      color: #FFFFFF;
+    }
+
+    .privacy .section-title h2,
+    .privacy .card h3 {
+      color: #FFFFFF;
+    }
+
+    .privacy .section-title p,
+    .privacy .card p {
+      color: #CBD5E1;
+    }
+
+    .privacy .card {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.12);
+    }
+
+    .support-box {
+      background: #FFFFFF;
+      border-radius: 30px;
+      padding: 45px;
+      max-width: 900px;
+      margin: auto;
+      text-align: center;
+      border: 1px solid #E5E7EB;
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+    }
+
+    .support-box h2 {
+      font-size: 42px;
+      color: #0F172A;
+      margin-bottom: 14px;
+    }
+
+    .support-box p {
+      color: #6B7280;
+      font-size: 18px;
+      margin-bottom: 24px;
+    }
+
+    .email {
+      color: #0F766E;
+      font-weight: 900;
+      font-size: 20px;
+      text-decoration: none;
+    }
+
+    footer {
+      padding: 30px 7%;
+      text-align: center;
+      color: #6B7280;
+      border-top: 1px solid #E5E7EB;
+      background: #FFFFFF;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .grid,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 60px;
+      }
+
+      .screen {
+        min-height: 430px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Doc<span>study</span></div>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#how">How It Works</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#support">Support</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="badge">React Native • Expo • No Backend</div>
+        <h1>Turn PDFs into <span>smart study material</span></h1>
+        <p>
+          Docstudy helps students convert PDF notes into quizzes, flashcards,
+          question answers, and short-answer practice using their own OpenAI API key.
+        </p>
+        <div class="buttons">
+          <a href="#features" class="btn btn-primary">Explore Features</a>
+          <a href="#privacy" class="btn btn-secondary">Privacy First</a>
+        </div>
+      </div>
+
+      <div class="phone-card">
+        <div class="screen">
+          <h3>Docstudy</h3>
+
+          <div class="upload-box">
+            <h2>📄 Upload PDF</h2>
+            <p>Select your notes and start learning instantly.</p>
+          </div>
+
+          <div class="mini-card">
+            <strong>Quiz Mode</strong>
+            Generate MCQs from your PDF.
+          </div>
+
+          <div class="mini-card">
+            <strong>Flashcards</strong>
+            Revise key concepts quickly.
+          </div>
+
+          <div class="mini-card">
+            <strong>Short Answers</strong>
+            Practice exam-style answers.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="section-title">
+        <h2>Everything you need to study from PDFs</h2>
+        <p>One simple mobile app for reading, revising, and practicing from your documents.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="icon">📄</div>
+          <h3>PDF Upload</h3>
+          <p>Pick a PDF from your device and extract text for study generation.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🧠</div>
+          <h3>Quizzes</h3>
+          <p>Create multiple-choice quiz questions from your PDF content.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🃏</div>
+          <h3>Flashcards</h3>
+          <p>Generate cards for fast revision of important topics and definitions.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">✍️</div>
+          <h3>Q&A Practice</h3>
+          <p>Generate question answers and short-answer questions for exam preparation.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="section-title">
+        <h2>How Docstudy works</h2>
+        <p>Simple setup. No server. No account required.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Add your OpenAI API key</h3>
+          <p>Users provide their own OpenAI API key inside the app to generate study content.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Select a PDF</h3>
+          <p>Choose your study notes, document, lecture PDF, or exam material.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Generate study tools</h3>
+          <p>Create quizzes, flashcards, question answers, and short-answer practice instantly.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="privacy" class="privacy">
+      <div class="section-title">
+        <h2>Privacy</h2>
+        <p>Docstudy is designed as a no-backend app.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>No Backend</h3>
+          <p>Docstudy does not require a custom server or user account system.</p>
+        </div>
+
+        <div class="card">
+          <h3>Your API Key</h3>
+          <p>The app uses the OpenAI API key provided by the user to generate study content.</p>
+        </div>
+
+        <div class="card">
+          <h3>PDF Processing</h3>
+          <p>PDF text is used only to create quizzes, cards, answers, and short-answer practice.</p>
+        </div>
+
+       
+      </div>
+    </section>
+
+    <section id="support">
+      <div class="support-box">
+        <h2>Support</h2>
+        <p>Need help with Docstudy? Contact support anytime.</p>
+        <a class="email" href="mailto:srishti218@gmail.com">srishti218@gmail.com</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Docstudy. All rights reserved.
+  </footer>
+
+</body>
+</html>

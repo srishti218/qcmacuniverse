@@ -26,6 +26,10 @@ def voicent():
 def docsnap():
     return render_template("docsnap.html")
 
+@app.route("/docstudy.html")
+def docstudy():
+    return render_template("docstudy.html")
+
 
 
 if __name__ == "__main__":
